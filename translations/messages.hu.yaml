@@ -27,3 +27,14 @@ entities:
             description: Leírás
             members: Tagok
             projects: Projektek
+
+    App\Entity\Project:
+        singular: Projekt
+        plural: Projektek
+        properties:
+            id: Azonosító
+            title: Cím
+            description: Leírás
+            status: Státusz
+            team: Csapat
+            tasks: Feladatok
