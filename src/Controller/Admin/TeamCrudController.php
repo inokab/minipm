@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Team;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\SortOrder;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -22,7 +23,7 @@ class TeamCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud->setDefaultSort(['name' => 'ASC'])
+        return $crud->setDefaultSort(['name' => SortOrder::ASC])
             ->setSearchFields(['name', 'description']);
     }
 

@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Enum\ProjectStatus;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\SortOrder;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -27,7 +28,7 @@ class ProjectCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud->setDefaultSort(['title' => 'ASC'])
+        return $crud->setDefaultSort(['title' => SortOrder::ASC])
             ->setSearchFields(['title', 'description']);
     }
 
