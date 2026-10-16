@@ -2,9 +2,17 @@
 
 namespace App\Enum;
 
-enum TaskPriority: string
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+enum TaskPriority: string implements TranslatableInterface
 {
     case Low = 'low';
     case Medium = 'medium';
     case High = 'high';
+
+    public function trans(TranslatorInterface $translator, ?string $locale = null): string
+    {
+        return $translator->trans('task_priority.'.$this->value, locale: $locale);
+    }
 }

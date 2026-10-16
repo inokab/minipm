@@ -1,0 +1,18 @@
+project_status:
+    planned: Tervezett
+    active: Aktív
+    completed: Lezárt
+
+task_status:
+    todo: Teendő
+    in_progress: Folyamatban
+    done: Kész
+
+task_priority:
+    low: Alacsony
+    medium: Közepes
+    high: Magas
+
+user_role:
+    ROLE_ADMIN: Adminisztrátor
+    ROLE_MEMBER: Tag
