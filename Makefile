@@ -1,4 +1,4 @@
-.PHONY: up down start stop log migrate migration
+.PHONY: up down start stop log migrate migration fixtures
 
 up:
 	docker compose up -d --wait
@@ -21,3 +21,6 @@ migrate:
 
 migration:
 	symfony console make:migration
+
+fixtures:
+	symfony console doctrine:fixtures:load --no-interaction
