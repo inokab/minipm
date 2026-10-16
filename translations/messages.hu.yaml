@@ -38,3 +38,16 @@ entities:
             status: Státusz
             team: Csapat
             tasks: Feladatok
+
+    App\Entity\Task:
+        singular: Feladat
+        plural: Feladatok
+        properties:
+            id: Azonosító
+            title: Cím
+            description: Leírás
+            status: Státusz
+            priority: Prioritás
+            dueDate: Határidő
+            assignee: Felelős
+            project: Projekt
