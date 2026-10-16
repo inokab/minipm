@@ -16,3 +16,14 @@ task_priority:
 user_role:
     ROLE_ADMIN: Adminisztrátor
     ROLE_MEMBER: Tag
+
+entities:
+    App\Entity\Team:
+        singular: Csapat
+        plural: Csapatok
+        properties:
+            id: Azonosító
+            name: Név
+            description: Leírás
+            members: Tagok
+            projects: Projektek
