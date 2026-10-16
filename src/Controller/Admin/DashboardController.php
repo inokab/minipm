@@ -25,10 +25,10 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Vezérlőpult', 'fa fa-home');
-        yield MenuItem::linkTo(TeamCrudController::class, 'Csapatok', 'fa fa-people-group');
-        yield MenuItem::linkTo(ProjectCrudController::class, 'Projektek', 'fa fa-folder');
-        yield MenuItem::linkTo(TaskCrudController::class, 'Feladatok', 'fa fa-list-check');
-        yield MenuItem::linkTo(UserCrudController::class, 'Felhasználók', 'fa fa-user');
+        yield MenuItem::linkToDashboard('dashboard.menu.home', 'fa fa-home');
+        yield MenuItem::linkTo(TeamCrudController::class, icon: 'fa fa-people-group');
+        yield MenuItem::linkTo(ProjectCrudController::class, icon: 'fa fa-folder');
+        yield MenuItem::linkTo(TaskCrudController::class, icon: 'fa fa-list-check');
+        yield MenuItem::linkTo(UserCrudController::class, icon: 'fa fa-user');
     }
 }

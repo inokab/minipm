@@ -17,6 +17,10 @@ user_role:
     ROLE_ADMIN: Adminisztrátor
     ROLE_MEMBER: Tag
 
+dashboard:
+    menu:
+        home: Vezérlőpult
+
 entities:
     App\Entity\Team:
         singular: Csapat
@@ -51,3 +55,7 @@ entities:
             dueDate: Határidő
             assignee: Felelős
             project: Projekt
+
+    App\Entity\User:
+        singular: Felhasználó
+        plural: Felhasználók
