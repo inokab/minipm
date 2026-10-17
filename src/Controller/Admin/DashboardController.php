@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -21,6 +22,11 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('MiniPM')
             ->useEntityTranslations();
+    }
+
+    public function configureCrud(): Crud
+    {
+        return Crud::new()->setFormOptions(['attr' => ['novalidate' => 'novalidate']]);
     }
 
     public function configureMenuItems(): iterable
