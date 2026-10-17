@@ -59,3 +59,10 @@ entities:
     App\Entity\User:
         singular: Felhasználó
         plural: Felhasználók
+        properties:
+            id: Azonosító
+            name: Név
+            email: E-mail
+            roles: Szerepkörök
+            plainPassword: Jelszó
+            teams: Csapatok
