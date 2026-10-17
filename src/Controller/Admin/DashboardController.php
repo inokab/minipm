@@ -35,6 +35,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkTo(TeamCrudController::class, icon: 'fa fa-people-group');
         yield MenuItem::linkTo(ProjectCrudController::class, icon: 'fa fa-folder');
         yield MenuItem::linkTo(TaskCrudController::class, icon: 'fa fa-list-check');
-        yield MenuItem::linkTo(UserCrudController::class, icon: 'fa fa-user');
+        yield MenuItem::linkTo(UserCrudController::class, icon: 'fa fa-user')->setPermission('ROLE_ADMIN');
     }
 }
