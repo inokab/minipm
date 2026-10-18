@@ -24,6 +24,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Twig\Component\Option\BadgeVariant;
  */
 class TaskCrudController extends AbstractCrudController
 {
+    public const array PRIORITY_BADGES = [
+        TaskPriority::Low->name => BadgeVariant::Light->value,
+        TaskPriority::Medium->name => BadgeVariant::Warning->value,
+        TaskPriority::High->name => BadgeVariant::Danger->value,
+    ];
+
+    public const array STATUS_BADGES = [
+        TaskStatus::Todo->name => BadgeVariant::Secondary->value,
+        TaskStatus::InProgress->name => BadgeVariant::Primary->value,
+        TaskStatus::Done->name => BadgeVariant::Success->value,
+    ];
+
     public static function getEntityFqcn(): string
     {
         return Task::class;
@@ -43,16 +55,8 @@ class TaskCrudController extends AbstractCrudController
             TextEditorField::new('description')->hideOnIndex(),
             AssociationField::new('project'),
             AssociationField::new('assignee'),
-            ChoiceField::new('status')->renderAsBadges([
-                TaskStatus::Todo->name => BadgeVariant::Secondary->value,
-                TaskStatus::InProgress->name => BadgeVariant::Primary->value,
-                TaskStatus::Done->name => BadgeVariant::Success->value,
-            ]),
-            ChoiceField::new('priority')->renderAsBadges([
-                TaskPriority::Low->name => BadgeVariant::Light->value,
-                TaskPriority::Medium->name => BadgeVariant::Warning->value,
-                TaskPriority::High->name => BadgeVariant::Danger->value,
-            ]),
+            ChoiceField::new('status')->renderAsBadges(self::STATUS_BADGES),
+            ChoiceField::new('priority')->renderAsBadges(self::PRIORITY_BADGES),
             DateField::new('dueDate')->setFormat(DateTimeField::FORMAT_MEDIUM),
         ];
     }

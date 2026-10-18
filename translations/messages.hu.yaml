@@ -21,6 +21,10 @@ dashboard:
     menu:
         home: Vezérlőpult
 
+project:
+    detail:
+        no_tasks: Nincs feladat.
+
 entities:
     App\Entity\Team:
         singular: Csapat
