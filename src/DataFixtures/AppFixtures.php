@@ -96,7 +96,7 @@ class AppFixtures extends Fixture
         /** @var array<string, User> $users */
         $users = [];
         foreach (self::USERS as $email => [$name, $role]) {
-            $users[$email] = UserFactory::createOne(['name' => $name, 'email' => $email, 'roles' => [$role->value]]);
+            $users[$email] = UserFactory::createOne(['name' => $name, 'email' => $email, 'role' => $role]);
         }
 
         foreach (self::TEAMS as $teamName => $teamData) {

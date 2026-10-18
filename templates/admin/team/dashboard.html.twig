@@ -156,11 +156,7 @@
                                 {{ member.name }}
                                 <span class="d-block small text-body-secondary">{{ member.email }}</span>
                             </span>
-                            <span>
-                                {% for role in member.roles %}
-                                    <twig:ea:Badge variant="{{ roleBadges[role] }}">{{ ('user_role.' ~ role)|trans }}</twig:ea:Badge>
-                                {% endfor %}
-                            </span>
+                            <twig:ea:Badge variant="{{ roleBadges[member.role.name] }}">{{ member.role|trans }}</twig:ea:Badge>
                         </li>
                     {% else %}
                         <li class="list-group-item text-body-secondary">{{ 'team.dashboard.no_members'|trans }}</li>

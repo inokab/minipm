@@ -26,8 +26,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class UserCrudController extends AbstractCrudController
 {
     public const array ROLE_BADGES = [
-        UserRole::Admin->value => BadgeVariant::Danger->value,
-        UserRole::Member->value => BadgeVariant::Secondary->value,
+        UserRole::Admin->name => BadgeVariant::Danger->value,
+        UserRole::Member->name => BadgeVariant::Secondary->value,
     ];
 
     public function __construct(
@@ -54,13 +54,7 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             EmailField::new('email'),
-            ChoiceField::new('roles')
-                ->setTranslatableChoices([
-                    UserRole::Admin->value => UserRole::Admin,
-                    UserRole::Member->value => UserRole::Member,
-                ])
-                ->allowMultipleChoices()
-                ->renderAsBadges(self::ROLE_BADGES),
+            ChoiceField::new('role')->renderAsBadges(self::ROLE_BADGES),
             TextField::new('plainPassword')
                 ->setFormType(PasswordType::class)
                 ->onlyOnForms()

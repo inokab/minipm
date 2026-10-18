@@ -33,12 +33,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(max: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column]
-    #[Assert\Count(min: 1)]
-    private array $roles = [UserRole::Member->value];
+    #[ORM\Column(length: 20, enumType: UserRole::class)]
+    private UserRole $role = UserRole::Member;
 
     /**
      * @var ?string The hashed password
@@ -110,15 +106,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        return $this->roles;
+        return [$this->role->value];
     }
 
-    /**
-     * @param list<string> $roles
-     */
-    public function setRoles(array $roles): static
+    public function getRole(): UserRole
     {
-        $this->roles = $roles;
+        return $this->role;
+    }
+
+    public function setRole(UserRole $role): static
+    {
+        $this->role = $role;
 
         return $this;
     }
