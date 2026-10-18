@@ -25,6 +25,21 @@ project:
     detail:
         no_tasks: Nincs feladat.
 
+team:
+    dashboard:
+        title: Áttekintés
+        active_projects: Aktív projektek
+        all_projects: '/ %count% projekt'
+        total_tasks: Összes feladat
+        open_tasks: '%count% nyitott'
+        completion: Készültség
+        overdue: Lejárt határidő
+        overdue_hint: nyitott feladat
+        tasks_by_status: Feladatok státusz szerint
+        count: Darab
+        share: Arány
+        no_tasks: A csapatnak még nincs feladata.
+
 entities:
     App\Entity\Team:
         singular: Csapat
