@@ -6,11 +6,13 @@ use App\Entity\Team;
 use App\Repository\TeamRepository;
 use App\Service\TeamStatistics;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
@@ -30,6 +32,18 @@ class DashboardController extends AbstractDashboardController
                 'team' => $team,
                 'stats' => $this->teamStatistics->forTeam($team),
             ], $teams),
+        ]);
+    }
+
+    #[AdminRoute('/login', name: 'login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
+    {
+        return $this->render('@EasyAdmin/page/login.html.twig', [
+            'last_username' => $authenticationUtils->getLastUsername(),
+            'error' => $authenticationUtils->getLastAuthenticationError(),
+            'csrf_token_intention' => 'authenticate',
+            'target_path' => $this->generateUrl('admin'),
+            'page_title' => 'MiniPM - Login',
         ]);
     }
 
