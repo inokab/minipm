@@ -1,4 +1,4 @@
-.PHONY: up down start stop log migrate migration fixtures
+.PHONY: up down start stop log migrate migration fixtures stan cs cs-fix lint check
 
 up:
 	docker compose up -d --wait
@@ -24,3 +24,20 @@ migration:
 
 fixtures:
 	symfony console doctrine:fixtures:load --no-interaction
+
+stan:
+	symfony php vendor/bin/phpstan analyse
+
+cs:
+	symfony php vendor/bin/php-cs-fixer fix --dry-run --diff
+
+cs-fix:
+	symfony php vendor/bin/php-cs-fixer fix
+
+lint:
+	symfony console lint:yaml config translations
+	symfony console lint:twig templates
+	symfony console lint:container
+	symfony console doctrine:schema:validate
+
+check: cs stan lint
