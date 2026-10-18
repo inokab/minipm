@@ -101,4 +101,72 @@
             </div>
         </div>
     </div>
+
+    {% set projectBadges = constant('App\\Controller\\Admin\\ProjectCrudController::STATUS_BADGES') %}
+    {% set roleBadges = constant('App\\Controller\\Admin\\UserCrudController::ROLE_BADGES') %}
+
+    <div class="row g-3 mt-1">
+        <div class="col-lg-8">
+            <div class="card h-100">
+                <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+                    <span><i class="fa fa-folder me-1"></i> {{ 'entities.App\\Entity\\Project.plural'|trans }}</span>
+                    <twig:ea:Badge variant="secondary">{{ projects|length }}</twig:ea:Badge>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for item in projects %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                <span>
+                                    <a href="{{ path('admin_project_detail', {entityId: item.project.id}) }}">{{ item.project.title }}</a>
+                                    <twig:ea:Badge variant="{{ projectBadges[item.project.status.name] }}" class="ms-1">{{ item.project.status|trans }}</twig:ea:Badge>
+                                </span>
+                                <span class="small text-body-secondary text-nowrap">
+                                    {% if item.totalTasks > 0 %}
+                                        {{ 'team.dashboard.project_tasks'|trans({'%done%': item.doneTasks, '%total%': item.totalTasks}) }}
+                                        · <span class="fw-bold text-success">{{ item.completion|format_percent_number }}</span>
+                                    {% else %}
+                                        {{ 'project.detail.no_tasks'|trans }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% if item.totalTasks > 0 %}
+                                <div class="progress mt-2" role="progressbar" style="height: .5rem" aria-label="{{ item.project.title }}"
+                                     aria-valuenow="{{ (item.completion * 100)|round }}" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-success" style="width: {{ item.completion * 100 }}%"></div>
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-body-secondary">{{ 'team.dashboard.no_projects'|trans }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+                    <span><i class="fa fa-user me-1"></i> {{ 'entities.App\\Entity\\Team.properties.members'|trans }}</span>
+                    <twig:ea:Badge variant="secondary">{{ team.members|length }}</twig:ea:Badge>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for member in team.members|sort((a, b) => a.name <=> b.name) %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                {{ member.name }}
+                                <span class="d-block small text-body-secondary">{{ member.email }}</span>
+                            </span>
+                            <span>
+                                {% for role in member.roles %}
+                                    <twig:ea:Badge variant="{{ roleBadges[role] }}">{{ ('user_role.' ~ role)|trans }}</twig:ea:Badge>
+                                {% endfor %}
+                            </span>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-body-secondary">{{ 'team.dashboard.no_members'|trans }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 {% endblock %}

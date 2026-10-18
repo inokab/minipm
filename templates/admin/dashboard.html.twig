@@ -1,0 +1,55 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{{ 'dashboard.menu.home'|trans }}{% endblock %}
+
+{% block main %}
+    <h2 class="fs-5 mb-3">{{ 'entities.App\\Entity\\Team.plural'|trans }}</h2>
+
+    <div class="row g-3">
+        {% for item in teams %}
+            {% set stats = item.stats %}
+            {% set overdueColor = stats.overdueTasks > 0 ? 'danger' : 'success' %}
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card h-100">
+                    <div class="card-header fw-semibold">
+                        <i class="fa fa-people-group me-1"></i>
+                        {{ item.team.name }}
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-body-secondary">{{ 'team.dashboard.active_projects'|trans }}</span>
+                            <span>
+                                <span class="fw-bold text-primary">{{ stats.activeProjects }}</span>
+                                <span class="text-body-secondary">{{ 'team.dashboard.all_projects'|trans({'%count%': stats.totalProjects}) }}</span>
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-body-secondary">{{ 'team.dashboard.overdue'|trans }}</span>
+                            <span class="fw-bold text-{{ overdueColor }}">{{ stats.overdueTasks }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="text-body-secondary">{{ 'team.dashboard.completion'|trans }}</span>
+                            <span class="fw-bold text-success">{{ stats.completion|format_percent_number }}</span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="{{ 'team.dashboard.completion'|trans }}"
+                             aria-valuenow="{{ (stats.completion * 100)|round }}" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" style="width: {{ stats.completion * 100 }}%"></div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <a href="{{ path('admin_team_dashboard', {id: item.team.id}) }}">
+                            {{ 'team.dashboard.title'|trans }} <i class="fa fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col">
+                <p class="text-body-secondary">{{ 'dashboard.no_teams'|trans }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

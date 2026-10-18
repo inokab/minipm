@@ -20,6 +20,7 @@ user_role:
 dashboard:
     menu:
         home: Vezérlőpult
+    no_teams: Még nincs csapat.
 
 project:
     detail:
@@ -39,6 +40,9 @@ team:
         count: Darab
         share: Arány
         no_tasks: A csapatnak még nincs feladata.
+        no_projects: A csapatnak még nincs projektje.
+        no_members: A csapatnak még nincs tagja.
+        project_tasks: '%done% / %total% feladat kész'
 
 entities:
     App\Entity\Team:
