@@ -62,6 +62,7 @@ class TeamCrudController extends AbstractCrudController
         return $this->render('admin/team/dashboard.html.twig', [
             'team' => $team,
             'stats' => $this->teamStatistics->forTeam($team),
+            'projects' => $this->teamStatistics->projectProgress($team),
         ]);
     }
 }

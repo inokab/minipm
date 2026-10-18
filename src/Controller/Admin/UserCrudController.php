@@ -25,6 +25,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 #[IsGranted('ROLE_ADMIN')]
 class UserCrudController extends AbstractCrudController
 {
+    public const array ROLE_BADGES = [
+        UserRole::Admin->value => BadgeVariant::Danger->value,
+        UserRole::Member->value => BadgeVariant::Secondary->value,
+    ];
+
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
@@ -55,10 +60,7 @@ class UserCrudController extends AbstractCrudController
                     UserRole::Member->value => UserRole::Member,
                 ])
                 ->allowMultipleChoices()
-                ->renderAsBadges([
-                    UserRole::Admin->value => BadgeVariant::Danger->value,
-                    UserRole::Member->value => BadgeVariant::Secondary->value,
-                ]),
+                ->renderAsBadges(self::ROLE_BADGES),
             TextField::new('plainPassword')
                 ->setFormType(PasswordType::class)
                 ->onlyOnForms()

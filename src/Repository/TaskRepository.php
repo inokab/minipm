@@ -40,6 +40,30 @@ class TaskRepository extends ServiceEntityRepository
         return $counts;
     }
 
+    /**
+     * @return array<int, array{total: int, done: int}>
+     */
+    public function countProgressByProjectForTeam(Team $team): array
+    {
+        $rows = $this->createQueryBuilder('task')
+            ->select('IDENTITY(task.project) AS projectId, COUNT(task.id) AS total')
+            ->addSelect('SUM(CASE WHEN task.status = :done THEN 1 ELSE 0 END) AS done')
+            ->join('task.project', 'project')
+            ->where('project.team = :team')
+            ->setParameter('team', $team)
+            ->setParameter('done', TaskStatus::Done)
+            ->groupBy('task.project')
+            ->getQuery()
+            ->getResult();
+
+        $progress = [];
+        foreach ($rows as $row) {
+            $progress[(int) $row['projectId']] = ['total' => (int) $row['total'], 'done' => (int) $row['done']];
+        }
+
+        return $progress;
+    }
+
     public function countOverdueForTeam(Team $team): int
     {
         return (int) $this->createQueryBuilder('task')
