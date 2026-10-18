@@ -60,12 +60,12 @@ final class TeamStatisticsTest extends KernelTestCase
 
     private function statistics(): TeamStatistics
     {
-        return TeamStatisticsTest::getContainer()->get(TeamStatistics::class);
+        return self::getContainer()->get(TeamStatistics::class);
     }
 
     private function team(string $name): Team
     {
-        $team = TeamStatisticsTest::getContainer()->get(TeamRepository::class)->findOneBy(['name' => $name]);
+        $team = self::getContainer()->get(TeamRepository::class)->findOneBy(['name' => $name]);
         self::assertNotNull($team);
 
         return $team;

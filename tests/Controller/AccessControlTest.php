@@ -10,7 +10,7 @@ final class AccessControlTest extends WebTestCase
 {
     public function testAnonymousUserIsRedirectedToLogin(): void
     {
-        $client = AccessControlTest::createClient();
+        $client = self::createClient();
         $client->request('GET', '/admin');
 
         self::assertResponseRedirects('/admin/login');
@@ -34,8 +34,8 @@ final class AccessControlTest extends WebTestCase
 
     private function loginAs(string $email): KernelBrowser
     {
-        $client = AccessControlTest::createClient();
-        $user = AccessControlTest::getContainer()->get(UserRepository::class)->findOneBy(['email' => $email]);
+        $client = self::createClient();
+        $user = self::getContainer()->get(UserRepository::class)->findOneBy(['email' => $email]);
         self::assertNotNull($user);
         $client->loginUser($user);
 

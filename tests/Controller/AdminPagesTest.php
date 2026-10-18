@@ -35,7 +35,7 @@ final class AdminPagesTest extends WebTestCase
     public function testProjectDetailGroupsTasksByStatus(): void
     {
         $client = $this->loginAsMember();
-        $project = AdminPagesTest::getContainer()->get(ProjectRepository::class)->findOneBy(['title' => 'Webshop újratervezés']);
+        $project = self::getContainer()->get(ProjectRepository::class)->findOneBy(['title' => 'Webshop újratervezés']);
         self::assertNotNull($project);
 
         $crawler = $client->request('GET', '/admin/project/'.$project->getId());
@@ -50,7 +50,7 @@ final class AdminPagesTest extends WebTestCase
     public function testTeamDashboardShowsStatistics(): void
     {
         $client = $this->loginAsMember();
-        $team = AdminPagesTest::getContainer()->get(TeamRepository::class)->findOneBy(['name' => 'Webfejlesztés']);
+        $team = self::getContainer()->get(TeamRepository::class)->findOneBy(['name' => 'Webfejlesztés']);
         self::assertNotNull($team);
 
         $client->request('GET', '/admin/team/'.$team->getId().'/dashboard');
@@ -61,8 +61,8 @@ final class AdminPagesTest extends WebTestCase
 
     private function loginAsMember(): KernelBrowser
     {
-        $client = AdminPagesTest::createClient();
-        $user = AdminPagesTest::getContainer()->get(UserRepository::class)->findOneBy(['email' => 'member@example.com']);
+        $client = self::createClient();
+        $user = self::getContainer()->get(UserRepository::class)->findOneBy(['email' => 'member@example.com']);
         self::assertNotNull($user);
         $client->loginUser($user);
 
