@@ -13,7 +13,7 @@
             <div class="col-md-6 col-xl-4">
                 <div class="card h-100">
                     <div class="card-header fw-semibold">
-                        <i class="fa fa-people-group me-1"></i>
+                        <twig:ea:Icon name="fa fa-people-group" class="me-1" />
                         {{ item.team.name }}
                     </div>
                     <div class="card-body">
@@ -40,9 +40,10 @@
                         </div>
                     </div>
                     <div class="card-footer text-end">
-                        <a href="{{ path('admin_team_dashboard', {id: item.team.id}) }}">
-                            {{ 'team.dashboard.title'|trans }} <i class="fa fa-arrow-right ms-1"></i>
-                        </a>
+                        <twig:ea:Button htmlElement="a" href="{{ path('admin_team_dashboard', {id: item.team.id}) }}"
+                                        variant="primary" size="sm" icon="fa fa-arrow-right" :withTrailingIcon="true">
+                            {{ 'team.dashboard.title'|trans }}
+                        </twig:ea:Button>
                     </div>
                 </div>
             </div>

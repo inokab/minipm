@@ -56,7 +56,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header fw-semibold">
-                    <i class="fa-solid fa-chart-simple me-1"></i>
+                    <twig:ea:Icon name="fa-solid fa-chart-simple" class="me-1" />
                     {{ 'team.dashboard.tasks_by_status'|trans }}
                 </div>
                 <div class="card-body">
@@ -83,7 +83,7 @@
                                 {% for status in enum_cases('App\\Enum\\TaskStatus') %}
                                     <tr>
                                         <td>
-                                            <i class="{{ statusIcons[status.name] }} text-{{ statusBadges[status.name] }} me-1"></i>
+                                            <twig:ea:Icon name="{{ statusIcons[status.name] }}" class="text-{{ statusBadges[status.name] }} me-1" />
                                             {{ status|trans }}
                                         </td>
                                         <td class="text-end fw-bold">{{ stats.countsByStatus[status.value] }}</td>
@@ -109,7 +109,7 @@
         <div class="col-lg-8">
             <div class="card h-100">
                 <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
-                    <span><i class="fa fa-folder me-1"></i> {{ 'entities.App\\Entity\\Project.plural'|trans }}</span>
+                    <span><twig:ea:Icon name="fa fa-folder" class="me-1" /> {{ 'entities.App\\Entity\\Project.plural'|trans }}</span>
                     <twig:ea:Badge variant="secondary">{{ projects|length }}</twig:ea:Badge>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -146,7 +146,7 @@
         <div class="col-lg-4">
             <div class="card h-100">
                 <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
-                    <span><i class="fa fa-user me-1"></i> {{ 'entities.App\\Entity\\Team.properties.members'|trans }}</span>
+                    <span><twig:ea:Icon name="fa fa-user" class="me-1" /> {{ 'entities.App\\Entity\\Team.properties.members'|trans }}</span>
                     <twig:ea:Badge variant="secondary">{{ team.members|length }}</twig:ea:Badge>
                 </div>
                 <ul class="list-group list-group-flush">
